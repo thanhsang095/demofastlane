@@ -1,0 +1,39 @@
+platform :ios do
+  desc 'Fetch certificates and provisioning profiles'
+  lane :certificates do
+    match(app_identifier: 'com.nus.fastlanedemo')
+  end
+end
+
+lane :bump_build_version do
+  increment_build_number(xcodeproj: './ios/FastLandeDemo.xcodeproj')
+  commit_version_bump(message: 'Bump iOS build', xcodeproj: './ios/FastLandeDemo.xcodeproj')
+  git_pull
+  push_to_git_remote
+end
+
+lane :build do
+  cocoapods(podfile: "./ios/Podfile")
+  certificates
+  bump_build_version
+  gym(
+    scheme: 'FastLandeDemo',
+    project: './ios/FastLandeDemo.xcodeproj',
+    clean: true,
+    workspace: './ios/FastLandeDemo.xcworkspace,
+    export_method: 'development',
+    output_directory: './builds'
+  )
+end
+
+lane :beta do
+  bump_build_version
+  build
+  appcenter_upload(
+    api_token: ENV["APPCENTER_API_TOKEN"],
+    owner_name: ENV["APPCENTER_OWNER_NAME"],
+    owner_type: ENV["APPCENTER_OWNER_TYPE"],
+    app_name: ENV["APPCENTER_APP_NAME_IOS"],
+    ipa: ENV["IPA_PATH"]
+  )
+end
