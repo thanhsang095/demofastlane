@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply from: './versionCode.gradle'
 
 import com.android.build.OutputFile
 
@@ -131,7 +132,7 @@ android {
         applicationId "com.fastlandedemo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        versionCode Integer.parseInt(VERSION_CODE)
         versionName "1.0"
     }
     splits {
