@@ -15,25 +15,21 @@ Install _fastlane_ using
 or alternatively using `brew cask install fastlane`
 
 # Available Actions
-### build
+## iOS
+### ios beta
 ```
-fastlane build
+fastlane ios beta
 ```
-Fetch certificates. Build the iOS application.
-### beta
-```
-fastlane beta
-```
-Fetch certificates, build and upload to App Center.
+Build the iOS beta version
 
 ----
 
-## iOS
-### ios certificates
+## Android
+### android beta
 ```
-fastlane ios certificates
+fastlane android beta
 ```
-Fetch certificates and provisioning profiles
+Build the android beta version
 
 ----
 
