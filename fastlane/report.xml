@@ -4,5 +4,65 @@
     
     
     
+      
+      <testcase classname="fastlane.lanes" name="00: Verifying fastlane version" time="0.009316">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="01: Switch to android prepare_all lane" time="0.003085">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="02: npm install" time="8.510313">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="03: Switch to android build lane" time="0.001849">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="04: Switch to android prepare lane" time="0.001436">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="05: incrementVersionCode" time="4.320223">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="06: clean" time="4.017731">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="07: rm -rf android/app/build" time="0.006729">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="08: react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res" time="4.621037">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="09: assembleRelease" time="69.404724">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="10: git_commit" time="0.11049">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="11: push_to_git_remote" time="6.14069">
+        
+      </testcase>
+    
   </testsuite>
 </testsuites>
