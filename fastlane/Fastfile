@@ -47,6 +47,7 @@ platform :ios do
     )
   end
 
+  # build external
   desc 'Build the iOS beta version'
   lane :beta do
     build_adhoc
@@ -56,9 +57,24 @@ platform :ios do
         ipa: './ios/build/FastLandeDemo_Adhoc.ipa'
       )
     )
+    # git_commit(path: ['./ios/FastLandeDemo.xcodeproj', './ios/FastLandeDemo/Info.plist'], message: 'iOS Bump versionCode')
+    # push_to_git_remote
+  end
+
+  # build internal
+  desc 'Build the iOS internal version'
+  lane :internal do
+    build_adhoc
+    appcenter_upload(
+      generic_appcenter_info.merge(
+        app_name: ENV['APP_CENTER_APP_NAME_IOS_INTERNAL'],
+        ipa: './ios/build/FastLandeDemo_Adhoc.ipa'
+      )
+    )
     git_commit(path: ['./ios/FastLandeDemo.xcodeproj', './ios/FastLandeDemo/Info.plist'], message: 'iOS Bump versionCode')
     push_to_git_remote
   end
+
 end
 
 platform :android do
@@ -90,6 +106,7 @@ platform :android do
     )
   end
 
+  # build external
   desc 'Build the android beta version'
   lane :beta do
     build
@@ -99,8 +116,22 @@ platform :android do
         apk: './android/app/build/outputs/apk/release/app-release.apk'
       )
     )
-    # git_commit(path: ['./android/gradle.properties'], message: 'Bump versionCode')
+    # git_commit(path: ['./android/gradle.properties'], message: 'Android Bump versionCode')
     # push_to_git_remote
+  end
+
+  # build internal
+  desc 'Build the android internal version'
+  lane :internal do
+    build
+    appcenter_upload(
+      generic_appcenter_info.merge(
+        app_name: ENV['APP_CENTER_APP_NAME_ANDROID_INTERNAL'],
+        apk: './android/app/build/outputs/apk/release/app-release.apk'
+      )
+    )
+    git_commit(path: ['./android/gradle.properties'], message: 'Android Bump versionCode')
+    push_to_git_remote
   end
 
 end
