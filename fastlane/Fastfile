@@ -4,7 +4,8 @@ generic_appcenter_info = {
   api_token: ENV['APP_CENTER_TOKEN'],
   owner_name: ENV['APP_CENTER_OWNER_NAME'],
   release_notes: Time.now.strftime('%Y%m%d %H:%M:%S'),
-  group: ENV['APP_CENTER_GROUP']
+  destinations: ENV['APP_CENTER_GROUP'],
+  destination_type: "group"
 }
 
 before_all do
