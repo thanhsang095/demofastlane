@@ -216,7 +216,7 @@ DEPENDENCIES
   cocoapods (~> 1.8.4)
   dotenv (~> 2.7.5)
   fastlane (~> 2.142.0)
-  fastlane-plugin-appcenter
+  fastlane-plugin-appcenter (~> 1.8.0)
 
 BUNDLED WITH
    1.17.3
