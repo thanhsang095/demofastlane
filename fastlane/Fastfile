@@ -1,5 +1,12 @@
 fastlane_version '2.142.0'
 
+generic_appcenter_info = {
+  api_token: ENV['APP_CENTER_TOKEN'],
+  owner_name: ENV['APP_CENTER_OWNER_NAME'],
+  release_notes: Time.now.strftime('%Y%m%d %H:%M:%S'),
+  group: ENV['APP_CENTER_GROUP']
+}
+
 before_all do
   prepare_all
 end
@@ -42,6 +49,12 @@ platform :ios do
   desc 'Build the iOS beta version'
   lane :beta do
     build_adhoc
+    appcenter_upload(
+      generic_appcenter_info.merge(
+        app_name: ENV['APP_CENTER_APP_NAME_IOS'],
+        ipa: './ios/build/FastLandeDemo_Adhoc.ipa'
+      )
+    )
     git_commit(path: ['./ios/FastLandeDemo.xcodeproj', './ios/FastLandeDemo/Info.plist'], message: 'iOS Bump versionCode')
     push_to_git_remote
   end
@@ -79,8 +92,14 @@ platform :android do
   desc 'Build the android beta version'
   lane :beta do
     build
-    git_commit(path: ['./android/gradle.properties'], message: 'Bump versionCode')
-    push_to_git_remote
+    appcenter_upload(
+      generic_appcenter_info.merge(
+        app_name: ENV['APP_CENTER_APP_NAME_ANDROID'],
+        apk: './android/app/build/outputs/apk/release/app-release.apk'
+      )
+    )
+    # git_commit(path: ['./android/gradle.properties'], message: 'Bump versionCode')
+    # push_to_git_remote
   end
 
 end
